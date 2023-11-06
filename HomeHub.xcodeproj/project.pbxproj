@@ -8,17 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		1E823F5F2AF9255900638C41 /* HomeHubApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E823F5E2AF9255900638C41 /* HomeHubApp.swift */; };
-		1E823F612AF9255900638C41 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E823F602AF9255900638C41 /* ContentView.swift */; };
+		1E823F612AF9255900638C41 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E823F602AF9255900638C41 /* HomeView.swift */; };
 		1E823F632AF9255A00638C41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E823F622AF9255A00638C41 /* Assets.xcassets */; };
 		1E823F662AF9255A00638C41 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E823F652AF9255A00638C41 /* Preview Assets.xcassets */; };
+		1E823F6E2AF94E7600638C41 /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E823F6D2AF94E7600638C41 /* WeatherManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1E823F5B2AF9255900638C41 /* HomeHub.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeHub.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E823F5E2AF9255900638C41 /* HomeHubApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHubApp.swift; sourceTree = "<group>"; };
-		1E823F602AF9255900638C41 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1E823F602AF9255900638C41 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		1E823F622AF9255A00638C41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1E823F652AF9255A00638C41 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1E823F6C2AF94E5C00638C41 /* HomeHub.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HomeHub.entitlements; sourceTree = "<group>"; };
+		1E823F6D2AF94E7600638C41 /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +54,10 @@
 		1E823F5D2AF9255900638C41 /* HomeHub */ = {
 			isa = PBXGroup;
 			children = (
+				1E823F6C2AF94E5C00638C41 /* HomeHub.entitlements */,
 				1E823F5E2AF9255900638C41 /* HomeHubApp.swift */,
-				1E823F602AF9255900638C41 /* ContentView.swift */,
+				1E823F602AF9255900638C41 /* HomeView.swift */,
+				1E823F6D2AF94E7600638C41 /* WeatherManager.swift */,
 				1E823F622AF9255A00638C41 /* Assets.xcassets */,
 				1E823F642AF9255A00638C41 /* Preview Content */,
 			);
@@ -137,7 +142,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E823F612AF9255900638C41 /* ContentView.swift in Sources */,
+				1E823F6E2AF94E7600638C41 /* WeatherManager.swift in Sources */,
+				1E823F612AF9255900638C41 /* HomeView.swift in Sources */,
 				1E823F5F2AF9255900638C41 /* HomeHubApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,6 +275,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = HomeHub/HomeHub.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HomeHub/Preview Content\"";
@@ -298,6 +305,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = HomeHub/HomeHub.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HomeHub/Preview Content\"";
