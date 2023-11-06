@@ -11,7 +11,8 @@ import EventKitUI
 struct HomeView: View {
     
     @State var date = Date()
-    @ObservedObject var weatherManager = WeatherManager()
+    @StateObject var weatherManager = WeatherManager()
+    @StateObject var storeManager = EventStoreManager()
     
     var timeFormat: DateFormatter {
         let formatter = DateFormatter()
@@ -33,6 +34,14 @@ struct HomeView: View {
     
     var body: some View {
         VStack {
+            List(storeManager.events, id: \.eventIdentifier) { event in
+                Text(event.title)
+            }
+            .task {
+                await storeManager.listenForCalendarChanges()
+            }
+            
+            
             Label(weatherManager.temp, systemImage: weatherManager.symbol)
             Text("\(timeString(date: date))")
                 .fontWeight(.semibold)
@@ -40,8 +49,13 @@ struct HomeView: View {
                 .onAppear(perform: {let _ = self.updateTimer})
         }
         .task {
+            try? await storeManager.setupEventStore()
+                
+        }
+        .task {
             await weatherManager.getWeather()
         }
+        .environmentObject(storeManager)
         .padding()
     }
 }

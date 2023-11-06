@@ -29,7 +29,7 @@ final class WeatherManager: ObservableObject {
     func getWeather() async {
         do {
             weather = try await Task.detached(priority: .userInitiated) {
-                return try await WeatherService.shared.weather(for: .init(latitude: 37.322998, longitude: -122.032181))  // Coordinates for Apple Park just as example coordinates
+                return try await WeatherService.shared.weather(for: .init(latitude: 52.370495, longitude: 4.633083))
             }.value
         } catch {
             fatalError("\(error)")

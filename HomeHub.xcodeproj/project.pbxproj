@@ -12,6 +12,10 @@
 		1E823F632AF9255A00638C41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E823F622AF9255A00638C41 /* Assets.xcassets */; };
 		1E823F662AF9255A00638C41 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1E823F652AF9255A00638C41 /* Preview Assets.xcassets */; };
 		1E823F6E2AF94E7600638C41 /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E823F6D2AF94E7600638C41 /* WeatherManager.swift */; };
+		1EB065122AF961760087F568 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB065112AF961760087F568 /* LocationManager.swift */; };
+		1EB065142AF9617B0087F568 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB065132AF9617B0087F568 /* EventManager.swift */; };
+		1EB065182AF9675C0087F568 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB065172AF9675C0087F568 /* Date+Extensions.swift */; };
+		1EB0651A2AF9676A0087F568 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB065192AF9676A0087F568 /* Array+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,11 @@
 		1E823F652AF9255A00638C41 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1E823F6C2AF94E5C00638C41 /* HomeHub.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HomeHub.entitlements; sourceTree = "<group>"; };
 		1E823F6D2AF94E7600638C41 /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
+		1EB065112AF961760087F568 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		1EB065132AF9617B0087F568 /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
+		1EB065152AF966950087F568 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		1EB065172AF9675C0087F568 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		1EB065192AF9676A0087F568 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,10 +63,12 @@
 		1E823F5D2AF9255900638C41 /* HomeHub */ = {
 			isa = PBXGroup;
 			children = (
+				1EB065152AF966950087F568 /* Info.plist */,
 				1E823F6C2AF94E5C00638C41 /* HomeHub.entitlements */,
 				1E823F5E2AF9255900638C41 /* HomeHubApp.swift */,
 				1E823F602AF9255900638C41 /* HomeView.swift */,
-				1E823F6D2AF94E7600638C41 /* WeatherManager.swift */,
+				1EB065162AF967530087F568 /* Extensions */,
+				1EB065102AF9616C0087F568 /* Managers */,
 				1E823F622AF9255A00638C41 /* Assets.xcassets */,
 				1E823F642AF9255A00638C41 /* Preview Content */,
 			);
@@ -70,6 +81,25 @@
 				1E823F652AF9255A00638C41 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1EB065102AF9616C0087F568 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				1E823F6D2AF94E7600638C41 /* WeatherManager.swift */,
+				1EB065112AF961760087F568 /* LocationManager.swift */,
+				1EB065132AF9617B0087F568 /* EventManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		1EB065162AF967530087F568 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1EB065172AF9675C0087F568 /* Date+Extensions.swift */,
+				1EB065192AF9676A0087F568 /* Array+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -142,9 +172,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EB065142AF9617B0087F568 /* EventManager.swift in Sources */,
+				1EB065122AF961760087F568 /* LocationManager.swift in Sources */,
 				1E823F6E2AF94E7600638C41 /* WeatherManager.swift in Sources */,
+				1EB0651A2AF9676A0087F568 /* Array+Extensions.swift in Sources */,
 				1E823F612AF9255900638C41 /* HomeView.swift in Sources */,
 				1E823F5F2AF9255900638C41 /* HomeHubApp.swift in Sources */,
+				1EB065182AF9675C0087F568 /* Date+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +316,7 @@
 				DEVELOPMENT_TEAM = G746TBT9SB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HomeHub/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -312,6 +347,7 @@
 				DEVELOPMENT_TEAM = G746TBT9SB;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HomeHub/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
