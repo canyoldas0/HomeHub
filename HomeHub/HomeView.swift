@@ -13,6 +13,7 @@ struct HomeView: View {
     @State var date = Date()
     @StateObject var weatherManager = WeatherManager()
     @StateObject var storeManager = EventStoreManager()
+    @StateObject var locationManager = LocationManager()
     
     var timeFormat: DateFormatter {
         let formatter = DateFormatter()
@@ -35,7 +36,10 @@ struct HomeView: View {
     var body: some View {
         VStack {
             List(storeManager.events, id: \.eventIdentifier) { event in
-                Text(event.title)
+                HStack {
+                    Text(event.title)
+                }
+            
             }
             .task {
                 await storeManager.listenForCalendarChanges()
@@ -50,10 +54,10 @@ struct HomeView: View {
         }
         .task {
             try? await storeManager.setupEventStore()
-                
         }
         .task {
-            await weatherManager.getWeather()
+            let location = try? await locationManager.requestLocation()
+            await weatherManager.getWeather(location)
         }
         .environmentObject(storeManager)
         .padding()
