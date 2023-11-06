@@ -35,7 +35,10 @@ struct HomeView: View {
     var body: some View {
         VStack {
             List(storeManager.events, id: \.eventIdentifier) { event in
-                Text(event.title)
+                HStack {
+                    Text(event.title)
+                }
+            
             }
             .task {
                 await storeManager.listenForCalendarChanges()
