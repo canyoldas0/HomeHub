@@ -8,6 +8,10 @@
 import WeatherKit
 import SwiftUI
 
+extension DeviceLocation {
+    static let haarlem = DeviceLocation(lat: 52.370495, long: 4.633083)
+}
+
 @MainActor
 final class WeatherManager: ObservableObject {
     
@@ -26,10 +30,11 @@ final class WeatherManager: ObservableObject {
         
     }
 
-    func getWeather() async {
+    func getWeather(_ loc: DeviceLocation? = nil) async {
+        
         do {
             weather = try await Task.detached(priority: .userInitiated) {
-                return try await WeatherService.shared.weather(for: .init(latitude: 52.370495, longitude: 4.633083))
+                return try await WeatherService.shared.weather(for: .init(latitude: loc?.lat ?? DeviceLocation.haarlem.long, longitude: loc?.long ?? DeviceLocation.haarlem.long))
             }.value
         } catch {
             fatalError("\(error)")

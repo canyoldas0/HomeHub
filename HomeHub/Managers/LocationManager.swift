@@ -45,13 +45,12 @@ final class LocationManager: NSObject, ObservableObject {
         
         let status = locationManager.authorizationStatus
         self.authStatus = status
-        if status == .authorizedWhenInUse || status == .authorizedAlways {
-            locationManager.requestLocation()
-        }
+//        if status == .authorizedWhenInUse || status == .authorizedAlways {
+        locationManager.requestLocation()
     }
     
   
-    func requestLocation(shouldLookInUserDefaults: Bool) async throws -> DeviceLocation {
+    func requestLocation() async throws -> DeviceLocation {
         try await withCheckedThrowingContinuation({ continuation in
             self.requestLocation { location in
                 guard let location = location else {
@@ -78,6 +77,10 @@ extension LocationManager: CLLocationManagerDelegate {
 
         locationCompletionHandler?(.init(lat: location.coordinate.latitude, long: location.coordinate.longitude))
         locationCompletionHandler = nil
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        debugPrint(error.localizedDescription)
     }
     
 }
