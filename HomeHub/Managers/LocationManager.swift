@@ -40,16 +40,17 @@ final class LocationManager: NSObject, ObservableObject {
         return manager
     }()
     
-    public func requestLocation(
-        completion: @escaping (DeviceLocation?) -> Void
-    ) {
+    public func requestLocation(completion: @escaping (DeviceLocation?) -> Void) {
         self.locationCompletionHandler = completion
+        
+        let status = locationManager.authorizationStatus
+        self.authStatus = status
+        if status == .authorizedWhenInUse || status == .authorizedAlways {
+            locationManager.requestLocation()
+        }
     }
     
-    func updateAuthStatus() {
-        locationManager.requestWhenInUseAuthorization()
-    }
-    
+  
     func requestLocation(shouldLookInUserDefaults: Bool) async throws -> DeviceLocation {
         try await withCheckedThrowingContinuation({ continuation in
             self.requestLocation { location in
@@ -61,12 +62,22 @@ final class LocationManager: NSObject, ObservableObject {
             }
         })
     }
-
-
 }
 
 extension LocationManager: CLLocationManagerDelegate {
     
-   
+    public func locationManager(
+        _: CLLocationManager,
+        didUpdateLocations locations: [CLLocation]
+    ) {
+
+        guard let location = locations.first else {
+            locationCompletionHandler = nil
+            return
+        }
+
+        locationCompletionHandler?(.init(lat: location.coordinate.latitude, long: location.coordinate.longitude))
+        locationCompletionHandler = nil
+    }
     
 }
