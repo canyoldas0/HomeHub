@@ -4,5 +4,7 @@
 <dict>
 	<key>NSCalendarsFullAccessUsageDescription</key>
 	<string>Fetch events in all your calendars and delete the ones you select in the app.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>More precise weather information</string>
 </dict>
 </plist>

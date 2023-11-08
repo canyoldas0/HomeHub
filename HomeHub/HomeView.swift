@@ -45,6 +45,10 @@ struct HomeView: View {
                 await storeManager.listenForCalendarChanges()
             }
             
+            if let location = locationManager.lastLocation {
+                Text("Location got \(location.long)")
+            }
+
             
             Label(weatherManager.temp, systemImage: weatherManager.symbol)
             Text("\(timeString(date: date))")
