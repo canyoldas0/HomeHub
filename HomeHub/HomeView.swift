@@ -35,21 +35,12 @@ struct HomeView: View {
     
     var body: some View {
         VStack {
-            List(storeManager.events, id: \.eventIdentifier) { event in
-                HStack {
-                    Text(event.title)
-                }
-            
-            }
-            .task {
-                await storeManager.listenForCalendarChanges()
-            }
-            
-            if let location = locationManager.lastLocation {
-                Text("Location got \(location.long)")
-            }
-
-            
+//            List(storeManager.events, id: \.eventIdentifier) { event in
+//                HStack {
+//                    Text(event.title)
+//                }
+//            }
+     
             Label(weatherManager.temp, systemImage: weatherManager.symbol)
             Text("\(timeString(date: date))")
                 .fontWeight(.semibold)
@@ -60,8 +51,15 @@ struct HomeView: View {
             try? await storeManager.setupEventStore()
         }
         .task {
-            let location = try? await locationManager.requestLocation()
-            await weatherManager.getWeather(location)
+            await storeManager.listenForCalendarChanges()
+        }
+        .task {
+            do {
+                let location = try await locationManager.requestLocation()
+                await weatherManager.getWeather(location)
+            } catch {
+                dump(error)
+            }
         }
         .environmentObject(storeManager)
         .padding()

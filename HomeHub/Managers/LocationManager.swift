@@ -10,13 +10,9 @@ import CoreLocation
 
 enum LocationResponse {
     case error(Error)
-    case granted(DeviceLocation)
+    case granted(CLLocation)
 }
 
-struct DeviceLocation {
-    let lat: Double
-    let long: Double
-}
 
 @MainActor
 final class LocationManager: NSObject, ObservableObject {
@@ -26,7 +22,7 @@ final class LocationManager: NSObject, ObservableObject {
     
     @Published var currentLocation: CLLocation? = nil
     @Published var authStatus: CLAuthorizationStatus
-    @Published var lastLocation: DeviceLocation? = nil
+    @Published var lastLocation: CLLocation? = nil
     public var locationManager: CLLocationManager
     private var locationCompletionHandler: ((LocationResponse) -> Void)?
 
@@ -89,7 +85,7 @@ final class LocationManager: NSObject, ObservableObject {
     }
     
   
-    func requestLocation() async throws -> DeviceLocation {
+    func requestLocation() async throws -> CLLocation {
         try await withCheckedThrowingContinuation({ continuation in
             self.requestLocation { location in
                 
@@ -124,10 +120,9 @@ extension LocationManager: CLLocationManagerDelegate {
             locationCompletionHandler = nil
             return
         }
-        let loc: DeviceLocation = .init(lat: location.coordinate.latitude, long: location.coordinate.longitude)
-        lastLocation = loc
+        lastLocation = location
 
-        locationCompletionHandler?(.granted(loc))
+        locationCompletionHandler?(.granted(location))
         locationCompletionHandler = nil
     }
     
