@@ -34,7 +34,7 @@ struct HomeView: View {
     }
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
 //            List(storeManager.events, id: \.eventIdentifier) { event in
 //                HStack {
 //                    Text(event.title)
@@ -42,6 +42,21 @@ struct HomeView: View {
 //            }
      
             Label(weatherManager.temp, systemImage: weatherManager.symbol)
+            if let location = locationManager.lastLocation {
+                HStack {
+                   Image(systemName: "house")
+                    // TODO: Get address
+                    Text("\(location.coordinate.latitude), \(location.coordinate.longitude)")
+                    Button (action: {
+                        Task {
+                            let location = try await locationManager.requestLocation()
+                            await weatherManager.getWeather(location)
+                        }
+                    }, label: {
+                        Image(systemName: "arrow.clockwise.circle.fill")
+                    })
+                }
+            }
             Text("\(timeString(date: date))")
                 .fontWeight(.semibold)
                 .font(.largeTitle)
