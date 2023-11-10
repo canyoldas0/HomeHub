@@ -22,8 +22,8 @@ struct HomeView: View {
     }
     
     func timeString(date: Date) -> String {
-         let time = timeFormat.string(from: date)
-         return time
+        let time = timeFormat.string(from: date)
+        return time
     }
     
     var updateTimer: Timer {
@@ -33,18 +33,17 @@ struct HomeView: View {
         })
     }
     
-    var body: some View {
+    @ViewBuilder
+    var weatherInfoStack: some View {
         VStack(alignment: .leading) {
-//            List(storeManager.events, id: \.eventIdentifier) { event in
-//                HStack {
-//                    Text(event.title)
-//                }
-//            }
-     
+            Text("\(timeString(date: date))")
+                .fontWeight(.semibold)
+                .font(Font.largeTitle.monospacedDigit())
+                .onAppear(perform: {let _ = self.updateTimer})
             Label(weatherManager.temp, systemImage: weatherManager.symbol)
             if let location = locationManager.lastLocation {
-                HStack {
-                   Image(systemName: "house")
+                HStack(alignment: .lastTextBaseline) {
+                    Image(systemName: "mappin.and.ellipse")
                     // TODO: Get address
                     Text("\(location.coordinate.latitude), \(location.coordinate.longitude)")
                     Button (action: {
@@ -55,29 +54,37 @@ struct HomeView: View {
                     }, label: {
                         Image(systemName: "arrow.clockwise.circle.fill")
                     })
+                    Spacer()
                 }
             }
-            Text("\(timeString(date: date))")
-                .fontWeight(.semibold)
-                .font(.largeTitle)
-                .onAppear(perform: {let _ = self.updateTimer})
         }
-        .task {
-            try? await storeManager.setupEventStore()
-        }
-        .task {
-            await storeManager.listenForCalendarChanges()
-        }
-        .task {
-            do {
-                let location = try await locationManager.requestLocation()
-                await weatherManager.getWeather(location)
-            } catch {
-                dump(error)
+    }
+    
+    var body: some View {
+        NavigationStack {
+            VStack {
+                weatherInfoStack
+                Spacer()
             }
+            
+            .task {
+                try? await storeManager.setupEventStore()
+            }
+            .task {
+                await storeManager.listenForCalendarChanges()
+            }
+            .task {
+                do {
+                    let location = try await locationManager.requestLocation()
+                    await weatherManager.getWeather(location)
+                } catch {
+                    dump(error)
+                }
+            }
+            .environmentObject(storeManager)
+            .padding()
+            .navigationTitle("Hello 👋")
         }
-        .environmentObject(storeManager)
-        .padding()
     }
 }
 
