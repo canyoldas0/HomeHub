@@ -64,6 +64,7 @@ struct HomeView: View {
         NavigationStack {
             VStack {
                 weatherInfoStack
+                    .frame(alignment: .leading)
                 Spacer()
             }
             
